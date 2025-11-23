@@ -1,27 +1,29 @@
 <html>
-
-<body>
+  <body>
     <div>
-    <h1>Employee Detail for {{ employee.name }}</h1>
-    <p><strong>Name:</strong> {{ employee.name }}</p>
-    <p><strong>Position:</strong> {{ employee.position }}</p>
-    <p><strong>Date Joined:</strong> {{ employee.date_joined }}</p>
-    <p><strong>Date of Birth:</strong> {{ employee.date_of_birth }}</p>
-    <p><strong>Phone Number:</strong> {{ employee.phone_number }}</p>
-    <a href="{% url 'employee_list' %}">Back to Employee List</a>
+      <h1>Employee Detail for {{ employee.name }}</h1>
+      <p><strong>Name:</strong> {{ employee.name }}</p>
+      <p><strong>Position:</strong> {{ employee.position }}</p>
+      <p><strong>Date Joined:</strong> {{ employee.date_joined }}</p>
+      <p><strong>Date of Birth:</strong> {{ employee.date_of_birth }}</p>
+      <p><strong>Phone Number:</strong> {{ employee.phone_number }}</p>
+      <a href="{% url 'employee_list' %}">Back to Employee List</a>
     </div>
 
     <div>
-    <h2>Projects</h2>
-    <ul>   
-    {% for p in projects %}
-        <li>{{ p.name }} <br>
-            Start Date: {{ p.start_date }} <br>
-            End Date: {{ p.end_date }}<br>
-            Amount: {{ p.amount }} <br>
+      <h2>Projects</h2>
+      <a href="{% url 'add_project' %}">Add Project</a>
+
+      <ul>
+        {% for p in projects %}
+        <li>
+          {{ p.name }} <br />
+          Start Date: {{ p.start_date }} <br />
+          End Date: {{ p.end_date }}<br />
+          Amount: {{ p.amount }} <br />
         </li>
-    {% endfor %}
-    </ul>
+        {% endfor %}
+      </ul>
     </div>
-</body>
+  </body>
 </html>

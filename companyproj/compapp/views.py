@@ -1,6 +1,7 @@
-from django.shortcuts import render
-from .models import Employee, Project
+from django.shortcuts import render, redirect, get_object_or_404
+from .models import *
 from django.utils import timezone
+from .forms import ProjectForm, EmployeeForm
 
 # Create your views here.
 
@@ -21,3 +22,38 @@ def employee_detail(request, employee_id):
 def employee_engineers(request):
     employees = Employee.objects.filter(position__icontains="engineer")
     return render(request, 'employee_list.html', {'employees': employees})
+
+
+
+
+
+
+from django.shortcuts import render, redirect
+from .forms import EmployeeForm
+
+def employee_create(request):
+    if request.method == "POST":
+        form = EmployeeForm(request.POST)
+        if form.is_valid():
+            form.save()
+            return redirect("employee_list")  # or any url you have
+    else:
+        form = EmployeeForm()
+
+    # 👇 THIS sends the form to the template as "form"
+    return render(request, "add_employee.html", {"form": form})
+
+
+def add_project(request):
+    if request.method == "POST":
+        form = ProjectForm(request.POST)
+        if form.is_valid():
+            form.save()
+            return redirect("employee_list")
+    else:
+        form = ProjectForm()
+
+    return render(request, "add_project.html", {"form": form})
+
+
+
